@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body {
+    width: auto;
+    font: 10px sans-serif;
+}
+hr{ margin:40px 0px;}
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+body>div{
+    width:80%;
+    margin:20px auto;
+}
+.x.axis path {
+  display: none;
+}
+
+.legend{
+    /*outline: red solid 2px;*/
+    /*display: inline;*/
+    /*position: absolute; top: 10px; right: 0px;*/
+}
+.legend .rect{
+    /*display: inline;*/
+}
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+</style>
+    <body>
+        <hr><hr>
+        <div id='dashboard'></div>
+        <hr><hr>
+        
+        <div id='ml'>
+            <form action="">
+                <label><input type="radio" name="city" value="in" checked> Inbound Discrepancy</label>
+                <label><input type="radio" name="city" value="out"> Outbound Discrepancy</label>
+                <label><input type="radio" name="city" value="rev"> Revenue</label>
+                <label><input type="radio" name="city" value="fr"> Fill Rate</label>
+            </form>
+        </div>
+        <hr><hr>
+        
+        <div id="pml">
+            <form action="">
+                <label><input type="radio" name="city" value="0" checked> Pulse Point</label>
+                <label><input type="radio" name="city" value="1">         Smaato</label>
+                <label><input type="radio" name="city" value="2">         Conversant</label>
+                <label><input type="radio" name="city" value="3">         AdX</label>
+                <label><input type="radio" name="city" value="4">         AOL</label>
+                <label><input type="radio" name="city" value="5">         Pubmatic</label>
+            </form>
+        </div>
+        <hr><hr>
+        
+
+        <div id="line">
+            <form>
+              <label><input type="radio" name="city" value="Pulsepoint" checked> Pulsepoint</label>
+              <label><input type="radio" name="city" value="Pubmatic"> Pubmatic</label>
+              <label><input type="radio" name="city" value="AdX"> AdX</label>
+              <label><input type="radio" name="city" value="AOL"> AOL</label>
+              <label><input type="radio" name="city" value="Smaato"> Smaato</label>
+              <label><input type="radio" name="city" value="Conversant"> Conversant</label>
+            </form>
+        </div>
+        <hr><hr>
+        
+        <div id="dlm"></div>
+        <hr><hr>
+
+        <script src="http://d3js.org/d3.v3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
+        <script src="hm.js"></script>
+        <script src="ml.js"></script>
+        <script src="pml.js"></script>
+        <script src="line.js"></script>
+        <script src="dlm.js"></script>
+    </body>
+</html>
+
+
+
+<!-- 
+var tdata = [
+    { imp_paid: 278510,  passbacks: 586084 },
+    { imp_paid:,  passbacks: 562880 },
+    { imp_paid: 66063 ,  passbacks: 492149 },
+    { imp_paid:,  passbacks: 428838 },
+    { imp_paid: 20126 ,  passbacks: 444236 },
+    { imp_paid:,  passbacks: 396177 },
+    { imp_paid: 11333 ,  passbacks: 405442 },
+    { imp_paid:,  passbacks: 372129 },
+    { imp_paid: 19684 ,  passbacks: 19698  },
+    { imp_paid:,  passbacks: 323221 },
+    { imp_paid: 141897,  passbacks: 108560 },
+    { imp_paid:,  passbacks: 123080 }
+]
+ -->
+
+
+
+<!-- 
+var tdata = [
+    {imp_seen: 864594,   imp_paid: 278510,  passbacks: 586084 },
+    {imp_seen: 889011,   imp_paid:,  passbacks: 562880 },
+    {imp_seen: 558212,   imp_paid: 66063 ,  passbacks: 492149 },
+    {imp_seen: 562880,   imp_paid:,  passbacks: 428838 },
+    {imp_seen: 464362,   imp_paid: 20126 ,  passbacks: 444236 },
+    {imp_seen: 428838,   imp_paid:,  passbacks: 396177 },
+    {imp_seen: 416775,   imp_paid: 11333 ,  passbacks: 405442 },
+    {imp_seen: 396177,   imp_paid:,  passbacks: 372129 },
+    {imp_seen: 39382 ,   imp_paid: 19684 ,  passbacks: 19698  },
+    {imp_seen: 372129,   imp_paid:,  passbacks: 323221 },
+    {imp_seen: 250457,   imp_paid: 141897,  passbacks: 108560 },
+    {imp_seen: 323221,   imp_paid:,  passbacks: 123080 }
+]
+ -->
+
+<!-- 
+778.89  864594     278510     586084     889011     562880     0.0274653519    0.0395915944    0.322128074     
+58.77   558212     66063      492149     562880     428838     0.00829306424   0.128641936     0.11834751  
+20.13   464362     20126      444236     428838     396177     -0.0828378082   0.108183488     0.0433411864    
+22      416775     11333      405442     396177     372129     -0.0519919127   0.0821646499    0.02719213  
+12.33   39382      19684      19698      372129     323221     0.894171107     -15.4088232     0.499822254     
+53.9    250457     141897     108560     323221     123080     0.225121511     -0.133750921    0.566552342
+ -->
+
+<!-- 
+{imp_seen: 889011, passbacks: 562880}
+{imp_seen: 562880, passbacks: 428838}
+{imp_seen: 428838, passbacks: 396177}
+{imp_seen: 396177, passbacks: 372129}
+{imp_seen: 372129, passbacks: 323221}
+{imp_seen: 323221, passbacks: 123080}
+ -->
+
+
+<!-- Fill Rate = 1-(ImpSeen / Passbacks) -->
+<!-- Inbound Disc = 1-(ImpSeen1 / ImpSeen2) -->
+<!-- Outbound Disc = 1-(Passbacks2 / Passbacks1) -->
