@@ -19,6 +19,7 @@
 
     var yAxis = d3.svg.axis()
         .scale(y)
+        .tickSize(-width)
         .orient("left");
 
     var color = d3.scale.category10();

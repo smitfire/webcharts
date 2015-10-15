@@ -2,32 +2,31 @@
 <meta charset="utf-8">
 <style>
 body {
-    width: auto;
+    width: 100%;
     font: 10px sans-serif;
 }
+body>div{
+    display: table;
+    text-align: center;
+    margin:20px auto;
+}
+
 hr{ margin:40px 0px;}
+
 .axis path,
 .axis line {
   fill: none;
   stroke: #000;
   shape-rendering: crispEdges;
 }
-body>div{
-    width:80%;
-    margin:20px auto;
+.axis .minor line {
+  stroke: #777;
+  stroke-dasharray: 2,2;
 }
 .x.axis path {
-  display: none;
+  /*display: none;*/
 }
 
-.legend{
-    /*outline: red solid 2px;*/
-    /*display: inline;*/
-    /*position: absolute; top: 10px; right: 0px;*/
-}
-.legend .rect{
-    /*display: inline;*/
-}
 .line {
   fill: none;
   stroke: steelblue;

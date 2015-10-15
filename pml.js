@@ -19,6 +19,7 @@
 
   var yAxis = d3.svg.axis()
       .scale(y)
+      .tickSize(-width)
       .orient("left");
 
   var line = d3.svg.line()
@@ -71,8 +72,8 @@
         .call(yAxis)
       .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 5)
-        .attr("dy", ".71em")
+        .attr("y", -20)
+        .attr("dy", -4)
         .style("text-anchor", "end")
         .text("Inbound Discpepancy");
 
@@ -98,8 +99,8 @@
           .data(cities)
         .enter().append("g")
           .attr("class", "legend")
-          // .attr("transform","translate(50,30)")
-          .attr("transform", function(d, i) { return "translate(" + (i*0.44) * -500 + ",-60)"; });
+          // .attr("transform", function(d, i) { return "translate(" + (i*0.44) * -500 + ",-60)"; });
+          .attr("transform", function(d, i) { return "translate(" + (i*0.5) * -350 + ",-60)"; });
 
       legend.append("rect")
           .attr("x", width+25)

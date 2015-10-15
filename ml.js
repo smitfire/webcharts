@@ -1,7 +1,7 @@
 (function(){
 
-  var margin = {top: 20, right: 80, bottom: 30, left: 50},
-      width = 960 - margin.left - margin.right,
+  var margin = {top: 100, right: 80, bottom: 30, left: 50},
+      width = 1060 - margin.left - margin.right,
       height = 600 - margin.top - margin.bottom;
 
   var parseDate = d3.time.format("%Y-%m-%d").parse;
@@ -25,7 +25,9 @@
 
   var yAxis = d3.svg.axis()
       .scale(y)
+      .tickSize(-width)
       .orient("left");
+      // .orient("left");
 
   var line = d3.svg.line()
       .interpolate("basis")
@@ -77,7 +79,7 @@
         .call(yAxis)
       .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", 5)
+        .attr("y", -50)
         .attr("dy", ".71em")
         .style("text-anchor", "end")
         .text("Inbound Discpepancy");
@@ -99,6 +101,26 @@
         .attr("dy", ".35em")
         .attr("class", "label")
         .text(function(d) { return d.name; });
+
+    var legend = svg.selectAll(".legend")
+          .data(cities)
+        .enter().append("g")
+          .attr("class", "legend")
+          // .attr("transform","translate(50,30)")
+          .attr("transform", function(d, i) { return "translate(" + ((i*0.4) * -450) + ",-60)"; });
+
+      legend.append("rect")
+          .attr("x", width+25)
+          .attr("width", 20)
+          .attr("height", 20)
+          .style("fill", function(d) { return color(d.name); });
+
+      legend.append("text")
+          .attr("x", width + 15)
+          .attr("y", 9)
+          .attr("dy", ".45em")
+          .style("text-anchor", "end")
+          .text(function(d) { return d.name; });
   });
 
   function changeData(){
